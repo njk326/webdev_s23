@@ -1,0 +1,23 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	background-color: white;
+	margin: 0rem;
+	overflow-y: hidden;
+}
+
+#image-scroll > .image {
+	width: 40vmin;
+	height: 55vmin;
+	object-fit: cover;
+	object-position: center;
+}
+
+#image-scroll {
+	display: flex;
+	gap: 2vmin;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(0%, -50%);
+}
