@@ -1,47 +1,60 @@
-	const scroll = document.getElementById("image-scroll");
+const scroll = document.getElementById("image-scroll");
+const background = document.getElementById("background");
 
-	//get cursor location on mouse click
-	const mouseDown = e => {
-		scroll.dataset.mouseDown = e.clientX;
+//get cursor location on cursor click
+const pointStart = a => {
+	//touch compatability
+	if (a.pointerType === "touch"){
+		scroll.dataset.pointStart = a.touches[0].clientX;
+	} else {
+		scroll.dataset.pointStart = a.clientX;
 	}
+}
 
-	//reset cursor position on mouse release
-	const mouseUp = () => {
-		scroll.dataset.mouseDown = "0";
-		scroll.dataset.prevPercent = scroll.dataset.percent;
+//reset cursor position on cursor release
+const pointEnd = () => {
+	scroll.dataset.pointStart = "0";
+	scroll.dataset.prevPercent = scroll.dataset.percent;
+}
+
+//cursor tracking function
+const pointMove = a => {
+	// if cursor is not active ignore movement
+	if(scroll.dataset.pointStart === "0") return;
+	
+	//get cursor movement as a percent of the total screen width
+	let pointDelta;
+	//touch compatability
+	if (a.pointerType === "touch"){
+	  pointDelta = parseFloat(scroll.dataset.pointStart) - a.touches[0].clientX;
+	} else {
+	  pointDelta = parseFloat(scroll.dataset.pointStart) - a.clientX;
 	}
+	const maxDelta = window.innerWidth / 2;
 
-	const mouseMove = e => {
-		// if mouse is not clicked, ignore mouse movement
-		if(scroll.dataset.mouseDown === "0") return;
-		
-		//get mouse movement as a percent of the total screen width
-		const mouseDelta = parseFloat(scroll.dataset.mouseDown) - e.clientX,
-			maxDelta = window.innerWidth / 2;
+	const percent = (pointDelta / maxDelta) * -100,
+		nextPercentMax = parseFloat(scroll.dataset.prevPercent) + percent, 
+		nextPercent = Math.max(Math.min(nextPercentMax, 0), -100);
 
-		const percent = (mouseDelta / maxDelta) * -100,
-			nextPercentMax = parseFloat(scroll.dataset.prevPercent) + percent, 
-			nextPercent = Math.max(Math.min(nextPercentMax, 0), -100);
-
-		//remember scroll position
-		scroll.dataset.percent = nextPercent;
-
-		scroll.animate({
-			transform: `translate(${nextPercent}%, -50%)`
-		}, {duration: 1200, fill: "forwards"});
-		
-		//parallax effect
-		for(const image of scroll.getElementsByClassName("image")) {
-			image.animate({
-			  objectPosition: `${100 + nextPercent}% center`
-			}, { duration: 100, fill: "forwards" });
-		}
+	scroll.dataset.percent = nextPercent;
+	
+	//scroll and parallax effect
+	scroll.animate({
+		transform: `translate(${nextPercent}%, -50%)`
+	}, {duration: 1200, fill: "forwards"});
+	
+	for(const image of scroll.getElementsByClassName("image")) {
+		image.animate({
+			objectPosition: `${100 + nextPercent}% center`
+		}, { duration: 200, fill: "forwards" });
 	}
+}
 
-	//touch events
-	window.onmousedown = e => mouseDown(e);
-	window.ontouchstart = e => mouseDown(e.touches[0]);
-	window.onmouseup = e => mouseUp(e);
-	window.ontouchend = e => mouseUp(e.touches[0]);
-	window.onmousemove = e => mouseMove(e);
-	window.ontouchmove = e => mouseMove(e.touches[0]);
+//cursor event listeners
+document.body.addEventListener("pointerdown", pointStart);
+document.body.addEventListener("pointerup", pointEnd);
+document.body.addEventListener("pointermove", pointMove);
+//touch event listeners
+document.body.addEventListener("touchstart", pointStart);
+document.body.addEventListener("touchend", pointEnd);
+document.body.addEventListener("touchmove", pointMove);
