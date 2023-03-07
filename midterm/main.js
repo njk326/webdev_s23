@@ -1,16 +1,11 @@
-//detect if device is mobile or not
-function isMobile() {
-	return window.innerWidth <= 768;
-}
-
 //mobile scrolling script
-if (isMobile()) {
+if (window.innerWidth <= 768) {
 	const scroll = document.getElementById("image-scroll");
 	const background = document.getElementById("background");
 
 	//get touch location
 	const pointStart = a => {
-		scroll.dataset.pointStart = a.clientX;
+		scroll.dataset.pointStart = a.touches[0].clientY;
 	}
 
 	//reset touch position on release
@@ -25,8 +20,8 @@ if (isMobile()) {
 	if(scroll.dataset.pointStart === "0") return;
 	
 	//get cursor movement as a percent of the total screen width
-	const pointDelta = parseFloat(scroll.dataset.pointStart) - a.clientX;
-	const maxDelta = window.innerWidth / 2;
+	const pointDelta = parseFloat(scroll.dataset.pointStart) - a.touches[0].clientY;
+	const maxDelta = window.innerHeight / 2;
 
 	const percent = (pointDelta / maxDelta) * -100,
 		nextPercentMax = parseFloat(scroll.dataset.prevPercent) + percent, 
@@ -36,20 +31,19 @@ if (isMobile()) {
 	
 	//scroll and parallax effect
 	scroll.animate({
-		transform: `translate(${nextPercent}%, -50%)`
+		transform: `translate(-50%, ${nextPercent}%)`
 	}, {duration: 1200, fill: "forwards"});
 	
 	for(const image of scroll.getElementsByClassName("image")) {
 		image.animate({
-			objectPosition: `${100 + nextPercent}% center`
+			objectPosition: `center ${100 + nextPercent}%`
 		}, { duration: 200, fill: "forwards" });
 	}
-	//cursor event listeners
-	document.body.addEventListener("pointerdown", pointStart);
-	document.body.addEventListener("pointerup", pointEnd);
-	document.body.addEventListener("pointermove", pointMove);
 	}
-	
+	//touch event listeners
+	document.body.addEventListener("touchstart", pointStart);
+	document.body.addEventListener("touchend", pointEnd);
+	document.body.addEventListener("touchmove", pointMove);
 //desktop scrolling script
 } else {
 	const scroll = document.getElementById("image-scroll");
@@ -91,9 +85,11 @@ if (isMobile()) {
 			objectPosition: `${100 + nextPercent}% center`
 		}, { duration: 200, fill: "forwards" });
 	}
+
+	}
 	//cursor event listeners
 	document.body.addEventListener("pointerdown", pointStart);
 	document.body.addEventListener("pointerup", pointEnd);
 	document.body.addEventListener("pointermove", pointMove);
-	}
 }
+
