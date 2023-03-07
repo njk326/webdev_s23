@@ -3,14 +3,7 @@ body {
 	height: 100vh;
 	background-color: white;
 	margin: 0rem;
-	overflow-y: hidden;
-}
-
-#image-scroll > .image {
-	width: 40vmin;
-	height: 55vmin;
-	object-fit: cover;
-	object-position: center;
+	overflow: hidden;
 }
 
 #image-scroll {
@@ -20,4 +13,12 @@ body {
 	left: 50%;
 	top: 50%;
 	transform: translate(0%, -50%);
+	user-select: none;
+}
+
+#image-scroll > .image {
+	width: 40vmin;
+	height: 55vmin;
+	object-fit: cover;
+	object-position: center;
 }
