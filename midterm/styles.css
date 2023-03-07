@@ -6,6 +6,7 @@ body {
 	overflow: hidden;
 }
 
+/* desktop */
 #image-scroll {
 	display: flex;
 	gap: 2vmin;
@@ -21,4 +22,22 @@ body {
 	height: 55vmin;
 	object-fit: cover;
 	object-position: center;
+}
+
+/* mobile */
+@media screen and (max-width: 768px) {
+	#image-scroll {
+		display: flex;
+		flex-direction: column;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -10%);
+		padding: 1vmin;
+	}
+	
+	#image-scroll > .image {
+		width: 60vmin;
+		height: 50vmin;
+		margin-bottom: 2vmin;
+	}
 }
