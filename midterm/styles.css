@@ -1,12 +1,13 @@
 body {
 	width: 100vw;
 	height: 100vh;
-	background-color: #110d0a;
+	background-color: #0D0D0D;
 	margin: 0rem;
 	overflow: hidden;
+	font-family: Helvetica, sans-serif;
 }
 
-/* desktop */
+/* desktop gallery */
 #image-scroll {
 	display: flex;
 	gap: 2vmin;
@@ -24,7 +25,7 @@ body {
 	object-position: right;
 }
 
-/* mobile */
+/* mobile gallery*/
 @media only screen and (max-width: 768px) {
 	#image-scroll {
 		display: flex;
@@ -40,5 +41,75 @@ body {
 		height: 50vmin;
 		object-fit: cover;
 		object-position: bottom;
+	}
+}
+
+/* about link styling */
+.about, .about:visited {
+	user-select: none;
+	position: absolute;
+	color: #D99441;
+	font-size: 4vmin;
+	text-decoration: none;
+	bottom: 10%;
+	right: 20%;
+}
+.about:hover {
+	color: #F2BE5C;
+	text-decoration: none;
+}
+
+.about-m {
+	display: none;
+}
+
+/* mobile about link */
+@media only screen and (max-width: 768px) {
+	.about {
+	display: none;
+	}
+	.about-m, .about-m:visited {
+		user-select: none;
+		display: block;
+		position: absolute;
+		color: #D99441;
+		font-size: 6vmin;
+		text-decoration: none;
+		bottom: 10%;
+		right: 7%;
+	}
+}
+
+/* about paragraph&image styling */
+#about-para {
+	font-size: 2vmin;
+	color: #D99441;
+	position: absolute;
+	left: 46%;
+	top: 58%;
+}
+
+.about-image {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	width: 50vmin;
+}
+
+/* mobile paragraph&image styling */
+@media only screen and (max-width: 768px) {
+	#about-para {
+		font-size: 4vmin;
+		color: #D99441;
+		position: absolute;
+		left: 20%;
+		top: 55%;
+	}
+	
+	.about-image {
+		position: absolute;
+		top: 25%;
+		left: 20%;
+		width: 60vmin;
 	}
 }
