@@ -99,17 +99,21 @@ body {
 /* mobile paragraph&image styling */
 @media only screen and (max-width: 768px) {
 	#about-para {
+		position: static;
 		font-size: 4vmin;
 		color: #D99441;
-		position: absolute;
-		left: 20%;
-		top: 55%;
 	}
 	
 	.about-image {
-		position: absolute;
-		top: 25%;
-		left: 20%;
-		width: 60vmin;
+		position: static;
+		width: 60%;
+	}
+
+	#about-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2vmin;
+		transform: translate(0, 50%);
 	}
 }
