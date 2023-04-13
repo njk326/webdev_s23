@@ -5,6 +5,6 @@ For my final, I want to use the three.js library to make a 3d portfolio website.
 * Overlay text with information
 
 Inspiration:
-https://www.rose-island.co/
-https://mont-blanc-climate-change.netlify.app/
-https://www2.panasonic.biz/jp/dsr/index/zaitaku/
+https://www.rose-island.co/ \
+https://mont-blanc-climate-change.netlify.app/ \
+https://www2.panasonic.biz/jp/dsr/index/zaitaku/ \
