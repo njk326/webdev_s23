@@ -22,11 +22,11 @@ function init() {
 	//load model
 	loader.load('content/babylon.gltf', function (gltf) {
 		scene.add( gltf.scene );
-		gltf.animations; // Array<THREE.AnimationClip>
-		gltf.scene; // THREE.Group
-		gltf.scenes; // Array<THREE.Group>
-		gltf.cameras; // Array<THREE.Camera>
-		gltf.asset; // Object
+		gltf.animations; 
+		gltf.scene; 
+		gltf.scenes; 
+		gltf.cameras;
+		gltf.asset;
 	}, undefined, function (error) {
 		console.error(error);
 	});
@@ -64,6 +64,7 @@ const cameraKeyframes = [
 
 let currentKeyframe = 0;
 
+//text fading function
 function updateTextOpacity() {
     const texts = ['text1', 'text2', 'text3', 'text4'];
 
@@ -71,21 +72,11 @@ function updateTextOpacity() {
         const textElement = document.getElementById(texts[i]);
 
         if (i === currentKeyframe) {
-            new TWEEN.Tween({ opacity: parseFloat(textElement.style.opacity) })
-                .to({ opacity: 1 }, 1000)
-                .easing(TWEEN.Easing.Quadratic.Out)
-                .onUpdate(function () {
-                    textElement.style.opacity = this.opacity;
-                })
-                .start();
+            setTimeout(() => {
+                textElement.classList.add('visible');
+            }, 750);
         } else {
-            new TWEEN.Tween({ opacity: parseFloat(textElement.style.opacity) })
-                .to({ opacity: 0 }, 1000)
-                .easing(TWEEN.Easing.Quadratic.Out)
-                .onUpdate(function () {
-                    textElement.style.opacity = this.opacity;
-                })
-                .start();
+            textElement.classList.remove('visible');
         }
     }
 }
@@ -128,6 +119,17 @@ window.addEventListener('mousedown', function (event) {
         }
     }
 });
+
+//responsive function
+function onWindowResize() {
+    // Update camera aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    // Update renderer size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', onWindowResize);
 
 function animate() {
     requestAnimationFrame(animate);

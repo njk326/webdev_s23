@@ -10,12 +10,34 @@ body {
 
 .text-overlay {
     position: absolute;
-    font-size: 24px;
-    color: #000;
+    font-size: 2vmin;
+    font-family: Segoe UI, Calibri, Helvetica;
+    color: rgb(41,30,25);
     opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     transition: opacity 1s; /* Adjust the duration of the fade-in effect */
+    z-index: 1;
 }
 
-html {
-    scroll-behavior: smooth;
+.visible {
+    opacity: 1;
+    transition: opacity 0.75s;
+}
+
+#text1 {
+    transform: translate(-140%, -210%);
+}
+
+#text2 {
+    transform: translate(-100%, -80%);
+}
+
+#text3 {
+    transform: translate(-285%, -10%);
+}
+
+#text4 {
+    transform: translate(-100%, 50%);
 }
