@@ -81,6 +81,7 @@ function updateTextOpacity() {
     }
 }
 
+//keyframing function
 function goToKeyframe(keyframeIndex) {
     currentKeyframe = keyframeIndex;
 
@@ -108,12 +109,13 @@ function goToKeyframe(keyframeIndex) {
 	updateTextOpacity();
 }
 
+//click event listeners
 window.addEventListener('mousedown', function (event) {
-    if (event.button === 0) { // Left click
+    if (event.button === 0) { 
         if (currentKeyframe < cameraKeyframes.length - 1) {
             goToKeyframe(currentKeyframe + 1);
         }
-    } else if (event.button === 2) { // Right click
+    } else if (event.button === 2) { 
         if (currentKeyframe > 0) {
             goToKeyframe(currentKeyframe - 1);
         }
@@ -122,11 +124,8 @@ window.addEventListener('mousedown', function (event) {
 
 //responsive function
 function onWindowResize() {
-    // Update camera aspect ratio
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
-    // Update renderer size
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 window.addEventListener('resize', onWindowResize);
