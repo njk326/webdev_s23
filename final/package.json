@@ -1,7 +1,7 @@
 {  
   "name": "final",
 "version": "1.0.0",
-"homepage": "https://njk326.github.io/webdev_s23/",
+"homepage": "https://njk326.github.io/webdev_s23/final/",
 "scripts": {
   "dev": "vite",
   "build": "vite build",
