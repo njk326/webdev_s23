@@ -1,3 +1,3 @@
 export default defineConfig({
-    base: '/final/',
+    base: '/webdev_s23/final/',
   });
